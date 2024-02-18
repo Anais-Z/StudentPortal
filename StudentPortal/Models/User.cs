@@ -14,6 +14,6 @@
 
         public string Status { get; set; }
 
-        public List<Course> Courses { get; set; }
+        public List<int> CourseIds { get; set; }
     }
 }
