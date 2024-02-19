@@ -14,6 +14,6 @@
 
         public string Status { get; set; }
 
-        public List<int> CourseIds { get; set; }
+        public ICollection<Course> Courses { get; set; }
     }
 }

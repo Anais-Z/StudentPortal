@@ -10,8 +10,8 @@ namespace StudentPortal.Models
 
         public string CourseDescription { get; set; }
 
-        public List<int> StudentIds { get; set; }
+        public ICollection<User> Userss { get; set; }
 
-        public User Professor { get; set; }
+      
     }
 }
