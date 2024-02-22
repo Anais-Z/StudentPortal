@@ -14,6 +14,6 @@
 
         public string Status { get; set; }
 
-        public ICollection<Course> Courses { get; set; }
+        public ICollection<UserCourse> UserCourses { get; set; }
     }
 }
