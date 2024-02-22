@@ -12,7 +12,7 @@
 
         public string Password { get; set; }
 
-        public string Status { get; set; }
+        public ICollection<Address> Addresses { get; set; }
 
         public ICollection<UserCourse> UserCourses { get; set; }
     }
