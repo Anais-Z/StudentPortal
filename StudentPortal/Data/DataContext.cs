@@ -13,6 +13,8 @@ namespace StudentPortal.Data
 
         public DbSet<Course> Courses { get; set; }
 
+        public DbSet<Address> Addresses { get; set; } 
+
         public DbSet<UserCourse> UserCourses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
