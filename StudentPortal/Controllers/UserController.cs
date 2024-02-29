@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudentPortal.Dto;
 using StudentPortal.Interfaces;
+using StudentPortal.Mappers;
 using StudentPortal.Models;
 
 namespace StudentPortal.Controllers
@@ -19,13 +21,15 @@ namespace StudentPortal.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<User>))]
         public IActionResult GetUsers()
         {
-            var users = _userRepository.GetUsers();
+            var users =  _userRepository.GetUsers();
+
+            var usersDto = users.Select(x => x.ToUserDto());
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            return Ok(users);
+            return Ok(usersDto);
         }
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using StudentPortal;
 using StudentPortal.Data;
+using StudentPortal.Interfaces;
 using StudentPortal.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
