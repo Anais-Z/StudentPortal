@@ -31,5 +31,29 @@ namespace StudentPortal.Controllers
             }
             return Ok(usersDto);
         }
+
+
+        [HttpGet("{firstName}/{lastName}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<User>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetUser(string firstName, string lastName)
+        {
+            var user = _userRepository.GetUser(firstName, lastName);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userDto = user.ToUserDto();
+
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(userDto);
+        }
     }
 }
