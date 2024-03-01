@@ -131,5 +131,37 @@ namespace StudentPortal.Controllers
             return NoContent();
 
         }
+
+        [HttpDelete("{userId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteUser(int userId)
+        {
+            //check if userId isn't null and it exists
+            if(userId == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if(!_userRepository.UserExists(userId))
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var user = _userRepository.GetUserById(userId);
+
+            //check if user object is removed sucessfully
+            if(!_userRepository.DeleteUser(user))
+            {
+                ModelState.AddModelError("", "Something went wrong while deleting user");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Deleted user succesfully");
+        }
     }
 }

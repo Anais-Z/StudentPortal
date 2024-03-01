@@ -24,6 +24,11 @@ namespace StudentPortal.Repository
             return _context.Users.Where(x => (x.FirstName == firstName) && (x.LastName == lastName)).FirstOrDefault();
         }
 
+        public User GetUserById(int id) 
+        {
+            return _context.Users.Where(x => x.Id == id).FirstOrDefault();
+        }
+
         public ICollection<User> GetUsers()
         {
             return _context.Users.OrderBy(x => x.Id).ToList();
@@ -43,6 +48,12 @@ namespace StudentPortal.Repository
         public bool UpdateUser(User user)
         {
             _context.Update(user);
+            return Save();
+        }
+
+        public bool DeleteUser(User user)
+        {
+            _context.Remove(user);
             return Save();
         }
     }
