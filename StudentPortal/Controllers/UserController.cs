@@ -55,5 +55,38 @@ namespace StudentPortal.Controllers
 
             return Ok(userDto);
         }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateUser([FromBody] UserDto userCreate) 
+        {
+            if(userCreate == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //check if the firstname and lastname is already registered
+            var user = _userRepository.GetUsers()
+                .Where(x => (x.FirstName.ToLower() == userCreate.FirstName.ToLower()) && (x.LastName.ToLower() == userCreate.LastName.ToLower()))
+                .FirstOrDefault();
+
+            if (user != null)
+            {
+                ModelState.AddModelError("", "User already exists");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if(!_userRepository.CreateUser(userCreate.ToUserObject()))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("successfully created");
+        }
     }
 }

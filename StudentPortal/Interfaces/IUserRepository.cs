@@ -8,6 +8,8 @@ namespace StudentPortal.Interfaces
 
         User GetUser(string firstName, string lastName);
 
+        bool CreateUser(User user);
+
         bool UserExists(int id);
     }
 }
