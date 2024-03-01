@@ -71,6 +71,7 @@ namespace StudentPortal.Controllers
                 .Where(x => (x.FirstName.ToLower() == userCreate.FirstName.ToLower()) && (x.LastName.ToLower() == userCreate.LastName.ToLower()))
                 .FirstOrDefault();
 
+            //check if the user already exists 
             if (user != null)
             {
                 ModelState.AddModelError("", "User already exists");
@@ -80,6 +81,7 @@ namespace StudentPortal.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            //check if the user object has been created and saved in the database
             if(!_userRepository.CreateUser(userCreate.ToUserObject()))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
@@ -87,6 +89,47 @@ namespace StudentPortal.Controllers
             }
 
             return Ok("successfully created");
+        }
+
+
+        [HttpPut("{userId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateUser(int userId, [FromBody] UserDto userDto)
+        { 
+            //check if userDto is null
+            if(userDto == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //if userId doesn't exist return
+            if(!_userRepository.UserExists(userId))
+            {
+                return BadRequest(ModelState);
+            }
+
+            //if userId doesn't match the id of the user object to be updated
+            if( userId != userDto.Id)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = userDto.ToUserObject();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            //check if the user object has been updated
+            if (!_userRepository.UpdateUser(user))
+            {
+                ModelState.AddModelError("", "Something went wrong while updating user");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+
         }
     }
 }

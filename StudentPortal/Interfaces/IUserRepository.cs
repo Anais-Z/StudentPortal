@@ -11,5 +11,7 @@ namespace StudentPortal.Interfaces
         bool CreateUser(User user);
 
         bool UserExists(int id);
+
+        bool UpdateUser(User user);
     }
 }

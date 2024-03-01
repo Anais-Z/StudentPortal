@@ -40,5 +40,10 @@ namespace StudentPortal.Repository
             return saved > 0 ? true : false;
         }
 
+        public bool UpdateUser(User user)
+        {
+            _context.Update(user);
+            return Save();
+        }
     }
 }
