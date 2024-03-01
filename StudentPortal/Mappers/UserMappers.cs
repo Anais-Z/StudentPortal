@@ -16,5 +16,17 @@ namespace StudentPortal.Mappers
                 Password = userModel.Password
             };
         }
+
+        public static User ToUserObject(this UserDto userDtoModel)
+        {
+            return new User
+            {
+                Id = userDtoModel.Id,
+                Email = userDtoModel.Email,
+                FirstName = userDtoModel.FirstName,
+                LastName = userDtoModel.LastName,
+                Password = userDtoModel.Password
+            };
+        }
     }
 }
