@@ -29,14 +29,25 @@ namespace StudentPortal.Mappers
             };
         }
 
-        public static Course ToCourseDto(this Course courseModel)
+        public static CourseDto ToCourseDto(this Course courseModel)
         {
-            return new Course
+            return new CourseDto
             {
                 Id = courseModel.Id,
                 Name= courseModel.Name,
                 UserCount= courseModel.UserCount,
                 CourseDescription= courseModel.CourseDescription
+            };
+        }
+
+        public static Course ToCourseObject(this CourseDto courseDtoModel)
+        {
+            return new Course
+            {
+                Id = courseDtoModel.Id,
+                Name = courseDtoModel.Name,
+                UserCount = courseDtoModel.UserCount,
+                CourseDescription = courseDtoModel.CourseDescription
             };
         }
     }
