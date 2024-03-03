@@ -43,12 +43,14 @@ namespace StudentPortal.Repository
 
         public bool UpdateCourse(Course course)
         {
+            _context.ChangeTracker.Clear();
             _context.Update(course);
             return Save();
         }
 
         public bool Save()
         {
+            
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
