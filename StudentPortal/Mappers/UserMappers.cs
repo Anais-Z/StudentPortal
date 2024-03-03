@@ -28,5 +28,16 @@ namespace StudentPortal.Mappers
                 Password = userDtoModel.Password
             };
         }
+
+        public static Course ToCourseDto(this Course courseModel)
+        {
+            return new Course
+            {
+                Id = courseModel.Id,
+                Name= courseModel.Name,
+                UserCount= courseModel.UserCount,
+                CourseDescription= courseModel.CourseDescription
+            };
+        }
     }
 }
