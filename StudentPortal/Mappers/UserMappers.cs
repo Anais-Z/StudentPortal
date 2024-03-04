@@ -50,5 +50,29 @@ namespace StudentPortal.Mappers
                 CourseDescription = courseDtoModel.CourseDescription
             };
         }
+
+        public static AddressDto ToAddressDto(this AddressDto addressModel)
+        {
+            return new AddressDto
+            {
+                Id = addressModel.Id,
+                Street = addressModel.Street,
+                City = addressModel.City,
+                Province = addressModel.Province,
+                PostalCode = addressModel.PostalCode,
+            };
+        }
+
+        public static Address ToAddressObject(this AddressDto addressDtoModel)
+        {
+            return new Address
+            {
+                Id = addressDtoModel.Id,
+                Street = addressDtoModel.Street,
+                City = addressDtoModel.City,
+                Province = addressDtoModel.Province,
+                PostalCode = addressDtoModel.PostalCode,
+            };
+        }
     }
 }
