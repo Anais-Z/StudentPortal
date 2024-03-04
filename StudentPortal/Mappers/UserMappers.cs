@@ -51,7 +51,7 @@ namespace StudentPortal.Mappers
             };
         }
 
-        public static AddressDto ToAddressDto(this AddressDto addressModel)
+        public static AddressDto ToAddressDto(this Address addressModel)
         {
             return new AddressDto
             {
